@@ -4,10 +4,10 @@
   "description": "This app is making for job exam",
   "main": "index.js",
   "scripts": {
-    "start":"nodemon index.js",
+    "start":"nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Md Shahed Talukder",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

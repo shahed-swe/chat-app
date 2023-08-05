@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 
 // Creating a Mongoose Schema to define the structure of the 'messages' collection
-const MessageSchema = mongoose.Schema(
+const messageModel = mongoose.Schema(
     {
         // Defining a field 'message' with a sub-field 'text' of type String, which is required
         message: {
@@ -25,4 +25,4 @@ const MessageSchema = mongoose.Schema(
 );
 
 // Creating a Mongoose model named "Messages" based on the defined schema
-module.exports = mongoose.model("Messages", MessageSchema);
+module.exports = mongoose.model("Messages", messageModel);

@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 
 // Creating a Mongoose Schema to define the structure of the 'users' collection
-const userSchema = new mongoose.Schema({
+const userModel = new mongoose.Schema({
     // Defining a field 'username' of type String, which is required and should be between 3 to 20 characters long
     username: {
         type: String,
@@ -41,4 +41,4 @@ const userSchema = new mongoose.Schema({
 });
 
 // Creating a Mongoose model named "Users" based on the defined schema
-module.exports = mongoose.model("Users", userSchema);
+module.exports = mongoose.model("Users", userModel);
