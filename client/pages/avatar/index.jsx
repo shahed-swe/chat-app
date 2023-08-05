@@ -7,8 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { setAvatarRoute } from "../api/config";
 import { useRouter } from "next/router";
 
-
-
 const SetAvatar = () => {
   const api = `https://api.multiavatar.com/4645646`;
   const router = useRouter();
@@ -16,7 +14,6 @@ const SetAvatar = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
 
-  
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -25,11 +22,13 @@ const SetAvatar = () => {
     theme: "dark",
   };
 
+  // Redirect to login page if user is not authenticated
   useEffect(() => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
       router.push("/login");
   }, []);
 
+  // Function to set the selected avatar as the user's profile picture
   const setProfilePicture = async () => {
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar", toastOptions);
@@ -54,7 +53,8 @@ const SetAvatar = () => {
     }
   };
 
-  const fetchAllAatars = useCallback(async() => {
+  // Function to fetch multiple random avatars from the API and convert them to base64
+  const fetchAllAatars = useCallback(async () => {
     let data = [];
 
     try {
@@ -68,23 +68,26 @@ const SetAvatar = () => {
     } catch (error) {
       console.log(error);
     }
-    
-    console.log(data)
+
     setAvatars(data);
     setIsLoading(false);
-  })
+  }, [api]);
 
+  // Fetch avatars when the component mounts
   useEffect(() => {
-    fetchAllAatars()
-  }, []);
+    fetchAllAatars();
+  }, [fetchAllAatars]);
 
+  // Render the SetAvatar component
   return (
     <>
       {isLoading ? (
+        // Render loading spinner if avatars are being fetched
         <div className="flex justify-center items-center flex-col bg-gray-800 min-h-screen">
           <img src={loader.src} alt="loader" className="max-w-full" />
         </div>
       ) : (
+        // Render avatar selection options if avatars are fetched
         <div className="flex justify-center items-center flex-col gap-3 bg-gray-800 min-h-screen">
           <div className="text-white">
             <h1>Pick an Avatar as your profile picture</h1>
@@ -92,11 +95,13 @@ const SetAvatar = () => {
           <div className="flex gap-2">
             {avatars.map((avatar, index) => (
               <div
-                className={`border-4 border-transparent rounded-full ${selectedAvatar === index ? 'border-indigo-600' : ''
+                // Apply border style to indicate the selected avatar
+                className={`border-4 border-transparent rounded-full ${selectedAvatar === index ? "border-indigo-600" : ""
                   } cursor-pointer w-24 h-24`}
                 key={avatar}
                 onClick={() => setSelectedAvatar(index)}
               >
+                {/* Display the avatar image */}
                 <img
                   src={`data:image/svg+xml;base64,${avatar}`}
                   alt="avatar"
