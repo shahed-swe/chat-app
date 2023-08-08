@@ -53,7 +53,7 @@ const server = app.listen(process.env.PORT, process.env.HOST, () =>
 // Creating a new instance of Socket.IO and configuring it to allow cross-origin requests from "https://kitchat.vercel.app"
 const io = socket(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "http://20.92.123.186:3000",
         credentials: true,
     },
 });
